@@ -10,11 +10,24 @@ import styles from "./page.module.css";
 // const Bar = () => {};
 
 //分割代入オブジェクト
-const obj = { foo: 1, bar: 2, baz: 3 };
-const { foo, bar, baz } = obj;
+// const obj = { foo: 1, bar: 2, baz: 3 };
+// const { foo, bar, baz } = obj;
 
 // const array = ["foo", "bar", "baz"];
 // const [foo, bar, baz] = array;
+
+//レストパラメーター
+//残余引数
+const array = ["foo", "bar", "baz", "qux"];
+const [a, ...rest] = array;
+
+//オブジェクトのレストパラメーター
+const obj = { foo: 1, bar: 2, baz: 3 };
+const { foo, ...restObj } = obj;
+
+//rest
+console.log(a);
+console.log(rest);
 
 export default function Home() {
   // const foo = "foo3";
@@ -27,7 +40,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       {/* テンプレート文字列を使って変数を埋め込む */}
-      <p>{`text:${foo}  ${bar}`}</p>
+      {/* <p>{`text:${foo}  ${bar}`}</p> */}
       {/* 三項演算子 */}
       <div>{condition ? "trutyの場合" : "falsyの場合"}</div>
       {/* ここはfalse */}
