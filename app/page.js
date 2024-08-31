@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./page.module.css";
+import { Kosugi } from "next/font/google";
 
 // function Foo() {
 //   //...
@@ -18,16 +19,37 @@ import styles from "./page.module.css";
 
 //レストパラメーター
 //残余引数
-const array = ["foo", "bar", "baz", "qux"];
-const [a, ...rest] = array;
+//関数の引数に...をつけると、残りの引数を配列として受け取ることができる
+//あまりが配列になるイメージ
+// const array = ["foo", "bar", "baz", "qux"];
+// const [a, ...rest] = array;
+
+//スプレッド構文
+//配列の展開　広がるイメージ
+//配列を展開して別の配列にする
+//そのままだと配列のままだが、スプレッド演算子を使うことで配列を展開できる
+// const numbers = [1, 2, 3, 4, 5];
+// const array1 = ["foo", "bar", "baz", "qux"];
+// console.log([...numbers, ...array1]);
+// console.log([...array1, 1, 2]);
+
+//オブジェクトの展開
+const obj1 = { foo: 1, bar: 2 };
+console.log({
+  a: "aaaa",
+  b: "bbbb",
+  ...obj1,
+});
 
 //オブジェクトのレストパラメーター
-const obj = { foo: 1, bar: 2, baz: 3 };
-const { foo, ...restObj } = obj;
+// const obj = { foo: 1, bar: 2, baz: 3 };
+// const { foo, ...restObj } = obj;
 
 //rest
-console.log(a);
-console.log(rest);
+// console.log(a);
+// console.log(rest);
+
+//
 
 export default function Home() {
   // const foo = "foo3";
