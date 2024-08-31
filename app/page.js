@@ -34,12 +34,12 @@ import { Kosugi } from "next/font/google";
 // console.log([...array1, 1, 2]);
 
 //オブジェクトの展開
-const obj1 = { foo: 1, bar: 2 };
-console.log({
-  a: "aaaa",
-  b: "bbbb",
-  ...obj1,
-});
+// const obj1 = { foo: 1, bar: 2 };
+// console.log({
+//   a: "aaaa",
+//   b: "bbbb",
+//   ...obj1,
+// });
 
 //オブジェクトのレストパラメーター
 // const obj = { foo: 1, bar: 2, baz: 3 };
@@ -55,6 +55,17 @@ export default function Home() {
   // const foo = "foo3";
   // const bar = "bar3";
   const condition = true;
+
+  //スプレッド演算子どんな時に使うのか？
+  const [user, setUser] = useState({
+    name: "tomo",
+    age: 30,
+    gender: "おんな",
+  });
+
+  const handleChange = (name) => {
+    setUser((prevUser) => ({ name, ...prevUser }));
+  };
 
   //useStateは分割代入で使うことが多い
   const [text, setText] = useState("");
