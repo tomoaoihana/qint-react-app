@@ -12,14 +12,21 @@ export default function Home() {
   // array.unshift(0);
   //popも破壊的メソッド
   // array.pop();
+  //shiftも破壊的メソッド
+  // array.shift();
 
   //スライスメソッドは破壊的メソッドではない
-  const Array = array.slice(0, -1);
+  const Array = array.slice(1);
 
-  console.log(Array);
+  //配列形メソッド
+  //map
+  const NewArray2 = array.map((num) => {
+    return num * 2;
+  });
+
+  console.log(NewArray2);
 
   const newArray = [...array, 4];
-  console.log(newArray);
 
   return <div className={styles.container}></div>;
 }
