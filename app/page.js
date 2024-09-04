@@ -1,61 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import styles from "./page.module.css";
 import { Kosugi } from "next/font/google";
 
-export default function Home() {
-  // const array = [
-  //   [1, 2],
-  //   [3, 4],
-  //   [5, 6],
-  // ];
-  //配列形メソッド
-  //map
-  // const NewArray2 = array.map((num) => {
-  //   return num * 2;
-  // });
+export default function Home(props) {
+  //useMemo,useCallbackを使ってパフォーマンスを向上させる
+  //多用している関数や値をキャッシュしておくことで、再レンダリング時に再計算を行わないようにする
+  //多用しても大丈夫？→メモリを消費するので、必要な時だけ使う
+  //useMemoは値を、useCallbackは関数をキャッシュする
 
-  // const NewArray3 = array.map((nestArray) => {
-  //   return nestArray.map((num) => {
-  //     return `${num}さん`;
-  //   });
-  // });
+  //useEffectはあまり使わない方がいい
+  //useEffectはコンポーネントがレンダリングされた後に実行される
 
-  //filter
-  // const array = [
-  //   { name: "tanaka", age: 20 },
-  //   { name: "suzuki", age: 30 },
-  //   { name: "yamada", age: 40 },
-  // ];
-  // const newArray = array.filter((user) => {
-  //   return user.age > 20;
-  // });
+  //useEffectはコンポーネントのレンダリング後に実行される
+  //基本使わない方がいい
+  //ライブラリを使う
 
-  //find
-  //20をNOにするとundifinedになる
-  //filterでは空の配列が返ってくる
-  // const users = [
-  //   { name: "tanaka", age: 20 },
-  //   { name: "suzuki", age: 30 },
-  //   { name: "yamada", age: 40 },
-  // ];
-  // const newUsers = users.find((user) => {
-  //   return user.age === 20;
-  // });
+  const users = useMemo(
+    () => [
+      { name: "tanaka", age: 20 },
+      { name: "suzuki", age: 30 },
+      { name: "yamada", age: 40 },
+      { name: "yamamoto", age: 10 },
+    ],
+    []
+  );
 
-  // console.log(newUsers);
+  const handleClick = useCallback(() => {
+    alert("クリックされました");
+  }, []);
 
-  //ミュータブル・イミュータブル
-  //いミュータブルが推奨されている
-  //元を書き換えると差文がわかりにくくなる。なので、ミュータブルは使わない
+  //早期リターンで条件分岐
+
+  if (users.length === 0) {
+    return <div>ユーザーは存在しません</div>;
+  }
 
   return (
     <div className={styles.container}>
-      {/* {[<div key="foo">foo</div>, <div key="bar">bar</div>]}
-      {["foo", "bar"].map((text) => {
-        return <div key={text}>{text}</div>;
-      })} */}
+      <button onClick={handleClick} className={styles.button}>
+        ボタン
+      </button>
+      {users.map((user) => {
+        return <div key={user.name}>{user.name}</div>;
+      })}
     </div>
   );
 }
